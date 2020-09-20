@@ -1,0 +1,13 @@
+[
+  {
+    "name": "mongo",
+    "type": "mongodb",
+    "host": "localhost",
+    "port": 27017,
+    "username": "mongo",
+    "password": "123456",
+    "database": "mongo",
+    "useUnifiedTopology": true,
+    "entities": ["./dist/modules/**/infra/typeorm/schemas/*.js"]
+  }
+]
