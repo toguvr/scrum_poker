@@ -12,9 +12,7 @@ import ICreateAppointmentDTO from '@modules/room/dtos/ICreateAppointmentDTO';
 import IFindAllInMonthFromProviderDTO from '@modules/room/dtos/IFindAllInMonthFromProviderDTO';
 import IFindAllUserAppoinrmentFromEnterpriseDTO from '@modules/room/dtos/IFindAllUserAppoinrmentFromEnterpriseDTO';
 import { getYear, getMonth, getDate } from 'date-fns';
-import ICreateUserDTO from '@modules/user/dtos/ICreateUserDTO';
-import Appointment from '../entities/User';
-import Users from '../entities/User';
+import Appointment from '../entities/UsersRoom';
 
 class AppointmentsRepository implements IAppointmentsRepository {
   private ormRepository: Repository<Appointment>;
@@ -195,14 +193,22 @@ class AppointmentsRepository implements IAppointmentsRepository {
     return numberOfAppointment;
   }
 
-  public async create({ name }: ICreateUserDTO): Promise<Users> {
-    const user = this.ormRepository.create({
-      name,
+  public async create({
+    service_id,
+    user_id,
+    enterprise_id,
+    date,
+  }: ICreateAppointmentDTO): Promise<Appointment> {
+    const appointment = this.ormRepository.create({
+      service_id,
+      user_id,
+      enterprise_id,
+      date,
     });
 
-    await this.ormRepository.save(user);
+    await this.ormRepository.save(appointment);
 
-    return user;
+    return appointment;
   }
 }
 

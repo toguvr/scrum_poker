@@ -1,5 +1,5 @@
-import Appointment from '../infra/typeorm/entities/User';
-import ICreateAppointmentDTO from '../dtos/ICreateUserDTO';
+import Appointment from '../infra/typeorm/entities/UsersRoom';
+import ICreateAppointmentDTO from '../dtos/ICreateAppointmentDTO';
 import IFindAllInMonthFromProviderDTO from '../dtos/IFindAllInMonthFromProviderDTO';
 import IFindAllUserAppoinrmentFromEnterpriseDTO from '../dtos/IFindAllUserAppoinrmentFromEnterpriseDTO';
 

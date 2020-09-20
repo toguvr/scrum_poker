@@ -2,7 +2,7 @@ import { container } from 'tsyringe';
 
 import './providers';
 
-import IRoomRepository from '@modules/room/repositories/IRoomRepository';
-import RoomRepository from '@modules/room/infra/typeorm/repositories/RoomRepository';
+import UserRepository from '@modules/user/infra/typeorm/repositories/UserRepository';
+import IUserRepository from '@modules/user/repositories/IUserRepository';
 
-container.registerSingleton<IRoomRepository>('RoomRepository', RoomRepository);
+container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
