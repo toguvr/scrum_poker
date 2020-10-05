@@ -26,6 +26,6 @@ export default class Users {
   @OneToMany(() => Room, rooms => rooms.admin)
   admin: Room[];
 
-  @OneToMany(() => UsersRoom, rooms => rooms.user_id)
+  @OneToMany(() => UsersRoom, rooms => rooms.user)
   usersRoom: UsersRoom[];
 }

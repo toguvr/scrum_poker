@@ -1,11 +1,10 @@
 import authConfig from '@config/auth';
-import AppError from '@shared/errors/AppError';
 
 import { inject, injectable } from 'tsyringe';
 
-import IUserRepository from '@modules/user2/repositories/IUserRepository';
 import { sign } from 'jsonwebtoken';
 import Users from '../infra/typeorm/entities/User';
+import IUserRepository from '../repositories/IUserRepository';
 
 interface IRequest {
   name: string;

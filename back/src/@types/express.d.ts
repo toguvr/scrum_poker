@@ -3,5 +3,12 @@ declare namespace Express {
     user: {
       id: string;
     };
+    connectedUsers: {
+      [key: string]: string;
+    };
+    io: {
+      to: any;
+      emit: any;
+    };
   }
 }

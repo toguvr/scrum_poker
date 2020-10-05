@@ -1,0 +1,31 @@
+{
+  "room": [
+    {
+      "id": 1,
+      "topic": "https://google.com",
+      "adm_id": "Otávio Augusto Chrispim De Paiva",
+      "isPrivate": 737337600000,
+      "password": "mestrado",
+      "created_at": "P",
+      "updated_at": "Matématica, Física"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Otávio Augusto Chrispim De Paiva",
+      "created_at": "P",
+      "updated_at": "Matématica, Física"
+    }
+  ],
+  "usersRoom": [
+    {
+      "id": 1,
+      "vote": "https://google.com",
+      "user_id": "Otávio Augusto Chrispim De Paiva",
+      "room_id": 737337600000,
+      "created_at": "P",
+      "updated_at": "Matématica, Física"
+    }
+  ]
+}

@@ -19,7 +19,7 @@ export default class Room {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('varchar', { name: 'topic', length: 255 })
+  @Column('varchar', { name: 'topic', length: 255, nullable: true })
   topic: string;
 
   @Column('varchar', { name: 'adm_id', length: 255 })

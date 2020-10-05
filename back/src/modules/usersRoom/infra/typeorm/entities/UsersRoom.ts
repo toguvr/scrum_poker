@@ -13,14 +13,14 @@ import Room from '@modules/room/infra/typeorm/entities/Room';
 
 import Users from '@modules/user/infra/typeorm/entities/User';
 
-@Index('roomuser_user_id_fk', ['adm_id'], {})
+@Index('roomuser_user_id_fk', ['user_id'], {})
 @Index('roomuser_room_id_fk', ['room_id'], {})
 @Entity('usersRoom', { schema: 'beeginscrum' })
 export default class UsersRoom {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('int', { name: 'name', unsigned: true })
+  @Column('int', { name: 'vote', unsigned: true, nullable: true })
   vote: number;
 
   @Column('varchar', { name: 'user_id', length: 255 })

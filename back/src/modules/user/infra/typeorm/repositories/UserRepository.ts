@@ -7,26 +7,25 @@ import {
   LessThan,
 } from 'typeorm';
 
-import IAppointmentsRepository from '@modules/room/repositories/IAppointmentsRepository';
-import ICreateAppointmentDTO from '@modules/room/dtos/ICreateAppointmentDTO';
+import ICreateAppointmentDTO from '@modules/room/dtos/ICreateRoomDTO';
 import IFindAllInMonthFromProviderDTO from '@modules/room/dtos/IFindAllInMonthFromProviderDTO';
 import IFindAllUserAppoinrmentFromEnterpriseDTO from '@modules/room/dtos/IFindAllUserAppoinrmentFromEnterpriseDTO';
-import { getYear, getMonth, getDate } from 'date-fns';
 import ICreateUserDTO from '@modules/user/dtos/ICreateUserDTO';
-import Appointment from '../entities/User';
+import User from '../entities/User';
 import Users from '../entities/User';
+import IUserRepository from '@modules/user/repositories/IUserRepository';
 
-class AppointmentsRepository implements IAppointmentsRepository {
-  private ormRepository: Repository<Appointment>;
+class UserRepository implements IUserRepository {
+  private ormRepository: Repository<User>;
 
   constructor() {
-    this.ormRepository = getRepository(Appointment);
+    this.ormRepository = getRepository(User);
   }
 
   public async findByDate(
     date: Date,
     provider_id: string,
-  ): Promise<Appointment | undefined> {
+  ): Promise<User | undefined> {
     const findAppointment = await this.ormRepository.findOne({
       where: { date, provider_id },
     });
@@ -34,7 +33,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
     return findAppointment;
   }
 
-  public async findById(id: string): Promise<Appointment | undefined> {
+  public async findById(id: string): Promise<User | undefined> {
     const findAppointment = await this.ormRepository.findOne({
       where: { id },
     });
@@ -42,7 +41,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
     return findAppointment;
   }
 
-  public async remove(data: ICreateAppointmentDTO): Promise<Appointment> {
+  public async remove(data: ICreateAppointmentDTO): Promise<User> {
     await this.ormRepository.remove(data);
   }
 
@@ -50,7 +49,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
     provider_id,
     month,
     year,
-  }: IFindAllInMonthFromProviderDTO): Promise<Appointment[]> {
+  }: IFindAllInMonthFromProviderDTO): Promise<User[]> {
     const parsedMonth = String(month).padStart(2, '0');
     const appointments = this.ormRepository.find({
       where: {
@@ -70,7 +69,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
     expirationAt,
     user_id,
     enterprise_id,
-  }: IFindAllUserAppoinrmentFromEnterpriseDTO): Promise<Appointment[]> {
+  }: IFindAllUserAppoinrmentFromEnterpriseDTO): Promise<User[]> {
     const appointments = this.ormRepository.find({
       where: {
         user_id,
@@ -82,7 +81,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
     return appointments;
   }
 
-  public async findAllFromUser(user_id: string): Promise<Appointment[]> {
+  public async findAllFromUser(user_id: string): Promise<User[]> {
     const appointments = this.ormRepository.find({
       where: {
         user_id,
@@ -93,9 +92,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
     return appointments;
   }
 
-  public async findAllFromUserInFutureDate(
-    user_id: string,
-  ): Promise<Appointment[]> {
+  public async findAllFromUserInFutureDate(user_id: string): Promise<User[]> {
     const appointments = this.ormRepository.find({
       where: {
         user_id,
@@ -116,9 +113,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
     return appointments;
   }
 
-  public async findAllFromUserInPastDate(
-    user_id: string,
-  ): Promise<Appointment[]> {
+  public async findAllFromUserInPastDate(user_id: string): Promise<User[]> {
     const appointments = this.ormRepository.find({
       where: {
         user_id,
@@ -142,7 +137,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
   public async findAllFromUserInThisEnterprise(
     user_id: string,
     enterprise_id: string,
-  ): Promise<Appointment[]> {
+  ): Promise<User[]> {
     const appointments = this.ormRepository.find({
       where: {
         user_id,
@@ -157,7 +152,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
   public async findByServiceAndUserId(
     user_id: string,
     service_id: string,
-  ): Promise<Appointment | undefined> {
+  ): Promise<User | undefined> {
     const appointments = this.ormRepository.findOne({
       where: {
         user_id,
@@ -173,7 +168,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
   public async usersInService(
     service_id: string,
     service_date: Date,
-  ): Promise<Appointment[]> {
+  ): Promise<User[]> {
     const numberOfAppointment = await this.ormRepository.find({
       relations: ['user', 'service'],
       where: {
@@ -206,4 +201,4 @@ class AppointmentsRepository implements IAppointmentsRepository {
   }
 }
 
-export default AppointmentsRepository;
+export default UserRepository;
